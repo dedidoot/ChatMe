@@ -49,11 +49,13 @@ public class MainActivity extends AppCompatActivity {
     private boolean startTyping = false;
     private int time = 2;
 
+    private static final String ROOM_NAME = "room2";
+
     private Socket mSocket;
 
     {
         try {
-            mSocket = IO.socket("https://blooming-ridge-18263.herokuapp.com");
+            mSocket = IO.socket("http://192.168.100.24:5000");
         } catch (URISyntaxException e) {
         }
     }
@@ -99,7 +101,8 @@ public class MainActivity extends AppCompatActivity {
             JSONObject userId = new JSONObject();
             try {
                 userId.put("username", Username + " Connected");
-                mSocket.emit("connect user", userId);
+                //mSocket.emit("connect user", ROOM_NAME);
+                mSocket.emit("create", ROOM_NAME);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -314,7 +317,8 @@ public class MainActivity extends AppCompatActivity {
             JSONObject userId = new JSONObject();
             try {
                 userId.put("username", Username + " DisConnected");
-                mSocket.emit("connect user", userId);
+                //mSocket.emit("connect user", ROOM_NAME);
+                mSocket.emit("create", ROOM_NAME);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -322,6 +326,7 @@ public class MainActivity extends AppCompatActivity {
             mSocket.disconnect();
             mSocket.off("chat message", onNewMessage);
             mSocket.off("connect user", onNewUser);
+            mSocket.off("create", onNewUser);
             mSocket.off("on typing", onTyping);
             Username = "";
             messageAdapter.clear();
