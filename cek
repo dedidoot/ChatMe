@@ -1,1 +1,12 @@
-right=18 down=8
+{
+    "status": true,
+    "meta": {
+        "response_code": 200,
+        "code": 200,
+        "severity": "OK",
+        "message": "The request has succeeded. An entity corresponding to the requested resource is sent in the response."
+    },
+    "message": "sip",
+    "right": "18",
+    "down": "8"
+}
